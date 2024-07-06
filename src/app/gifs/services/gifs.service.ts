@@ -5,7 +5,7 @@ import { Gif, SearchResponse } from '../interfaces/gifs.interfaces';
 @Injectable({ providedIn: 'root' })
 export class GifsService {
 
-  public gifsList: Gif[] = [];
+  public gifList: Gif[] = [];
 
   private _tagsHistory: string[] = [];
   private apiKey:       string = 'pIRvOhYwpnwTNpLzuW14HyrrAR54YPVr';
@@ -42,8 +42,8 @@ export class GifsService {
     this.http.get<SearchResponse>(`${ this.serviceUrl }/search?`, { params })
       .subscribe( resp  => {
 
-        this.gifsList = resp.data;
-        console.log({ gifs: this.gifsList });
+        this.gifList = resp.data;
+        // console.log({ gifs: this.gifList });
 
       });
 
