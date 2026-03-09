@@ -16,6 +16,8 @@ export class CounterPageComponent {
 
   counterSignal = signal(10);
 
+  constructor() {}
+
   increaseBy(value: number) {
     this.counter += value;
     this.counterSignal.update((current) => current + value);
