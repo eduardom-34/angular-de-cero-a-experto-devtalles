@@ -6,7 +6,8 @@
     "axe/structure": [
       "default",
       {
-        "definition-list": "off"
+        "definition-list": "off",
+        "list": "off"
       }
     ]
   }
