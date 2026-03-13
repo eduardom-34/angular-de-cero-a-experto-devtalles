@@ -15,14 +15,16 @@
     #txtName
     />
 
-    <h3>{{ power() }}</h3>
     <input
     type="number"
     placeholder="Poder"
     class="form-control mt-2"
+    [value]="power()"
+    (input)="power.set(+txtPower.value)"
+    #txtPower
     />
 
-    <button class="mt-2 btn btn-primary">Agregar</button>
+    <button (click)="addCharacter()" class="mt-2 btn btn-primary">Agregar</button>
   </div>
 
   <div class="col-12 col-sm-6">
