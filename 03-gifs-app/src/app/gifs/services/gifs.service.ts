@@ -1,10 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import type { GiphyResponse } from '../interfaces/giphy.interfaces';
 import { GifMapper } from '../mapper/gif.mapper';
 import { Gif } from '../interfaces/gif.interface';
 import { map, tap } from 'rxjs';
+
+// {
+//   'goku': [gi1, gi2],
+//   'saitama': [gi1, gi2],
+//   'dragonball': [gi1, gi2],
+// }
+
+// Record<string, Gif[]>;
+
+
 
 @Injectable({providedIn: 'root'})
 export class GifsService {
@@ -13,6 +23,9 @@ export class GifsService {
 
   trendingGifs = signal<Gif[]>([]);
   trendingGifsLoading = signal(true);
+
+  searchHistory = signal<Record<string, Gif[]>>({});
+  searchHistoryKeys = computed(() => Object.keys(this.searchHistory()));
 
   constructor() {
     this.loadTrendingGifs();
@@ -48,7 +61,12 @@ export class GifsService {
       map( ({ data }) => data ),
       map( ( items ) => GifMapper.mapGiphyItemsToGifArray(items) ),
 
-      // TODO: historial
+      tap( items => {
+        this.searchHistory.update( history => ({
+          ...history,
+          [query.toLocaleLowerCase()]: items,
+        }))
+      })
     );
 
 
