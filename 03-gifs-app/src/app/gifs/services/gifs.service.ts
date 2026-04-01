@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import type { GiphyResponse } from '../interfaces/giphy.interfaces';
 import { GifMapper } from '../mapper/gif.mapper';
 import { Gif } from '../interfaces/gif.interface';
-import { map, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 // {
 //   'goku': [gi1, gi2],
@@ -49,7 +49,7 @@ export class GifsService {
 
   }
 
-  searchGifs(query: string) {
+  searchGifs(query: string):Observable<Gif[]>{
 
     return this.http.get<GiphyResponse>(`${ environment.giphyUrl }/gifs/search`, {
       params: {
@@ -69,13 +69,16 @@ export class GifsService {
       })
     );
 
-
-
     // .subscribe( ( resp ) => {
     //   const gifs = GifMapper.mapGiphyItemsToGifArray( resp.data );
     //   console.log({ searcch: gifs });
 
     // })
-
   }
+
+  getHistoryGifs( query: string): Gif[] {
+    return this.searchHistory()[query] ?? [];
+  }
+
+
 }
