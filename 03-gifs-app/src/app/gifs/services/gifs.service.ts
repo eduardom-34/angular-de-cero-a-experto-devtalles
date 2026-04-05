@@ -12,7 +12,6 @@ const GIF_KEY = 'gifs';
 const loadFromLocalStorage = () => {
   const gifsFromLocalStorage = localStorage.getItem(GIF_KEY) ?? '{}';
   const gifs = JSON.parse(gifsFromLocalStorage);
-  console.log({gifs});
   return gifs;
 }
 
@@ -43,8 +42,6 @@ export class GifsService {
       groups.push( this.trendingGifs().slice(i, i + 3));
     }
 
-    console.log(groups);
-
     return groups; // [gif, gif, gif], [ gif, gif, gif], [ gif, gif, gif];
   })
 
@@ -72,7 +69,6 @@ export class GifsService {
         const gifs = GifMapper.mapGiphyItemsToGifArray(resp.data);
         this.trendingGifs.set(gifs);
         this.trendingGifsLoading.set(false);
-        console.log({ gifs });
       });
   }
 
