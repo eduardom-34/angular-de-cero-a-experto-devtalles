@@ -9,9 +9,9 @@ placeholder="Buscar por pais"
 <country-list [countries]="countries()"/>
 
 
-@if (countryResources.error() ) {
-  <h3>{{ countryResources.error() }}</h3>
-} @if (countryResources.hasValue()) {
-  <country-list [countries]="countryResources.value()" />
+@if (countryResource.error() ) {
+  <h3>{{ countryResource.error() }}</h3>
+} @if (countryResource.hasValue()) {
+  <country-list [countries]="countryResource.value()" />
 }
 
