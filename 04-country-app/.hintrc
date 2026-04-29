@@ -10,11 +10,7 @@
         "label": "off"
       }
     ],
-    "axe/text-alternatives": [
-      "default",
-      {
-        "image-alt": "off"
-      }
-    ]
+    "axe/text-alternatives": "off",
+    "typescript-config/consistent-casing": "off"
   }
 }
